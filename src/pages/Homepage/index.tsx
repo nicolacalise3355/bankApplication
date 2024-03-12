@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { Button, View } from 'react-native'
+import { Text, Pressable, View } from 'react-native'
 import { HomepageStyle } from './style'
 import useHttpSimulation from '../../hooks/useHttpSimulation'
 import { Endpoints_uri } from '../../costants/Endpoints'
 import { CardBox, CardBoxEmpty } from '../../atoms'
 import { ICardInfo } from '../../interfaces/models/card'
 import { TransactionsList, TransactionsListLoader } from '../../components'
+import { ITransaction } from '../../interfaces/models/transaction'
 
 //used as placeholder template, we assume we don't take this from api response.
 const CARD_ASSET_SAMPLE = 'https://pearl.cdn.cornercard.ch/static/cop-ch/cross/images/cards/big/MASTERCARD_GOLD_CORNER.PNG';
@@ -31,10 +32,13 @@ export const Homepage = () => {
             availability={`${(cardData as ICardInfo).availability.amount} ${(cardData as ICardInfo).availability.currency}`}
           />
         }
-        <Button title='Show All' onPress={showAllTransactions}/>
+        <Pressable onPress={showAllTransactions}>
+          <Text>Show All</Text>
+        </Pressable>
         { isLoadingTransactions && <TransactionsListLoader />}
         { !isLoadingTransactions && transactions && 
           <TransactionsList 
+            transactions={(transactions as ITransaction[]).slice(0,3)}
           />
         }
     </View>
