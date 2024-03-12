@@ -2,7 +2,7 @@ import { IInbox } from "./models/Inbox";
 import { ICardInfo } from "./models/card";
 import { ITransaction } from "./models/transaction";
 
-export type ApiDataType = IInbox[] | ITransaction[] | ICardInfo[] | null;
+export type ApiDataType = IInbox[] | ITransaction[] | ICardInfo;
 
 export interface ApiResponse {
     data: ApiDataType;

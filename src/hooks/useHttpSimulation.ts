@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import httpSimulation from '../services/HttpSimulator';
 import { IHttpSimulation } from '../interfaces/ApiInterfaces';
 
-const useHttpSimulation = (url: string): IHttpSimulation => {
+const useHttpSimulation = (url: string, delay: number = 1000): IHttpSimulation => {
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -13,7 +13,7 @@ const useHttpSimulation = (url: string): IHttpSimulation => {
       setError(null);
 
       try {
-        const response = await httpSimulation(url);
+        const response = await httpSimulation(url, delay);
 
         setData(response.data);
       } catch (error) {
