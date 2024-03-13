@@ -15,9 +15,9 @@ const CARD_ASSET_SAMPLE = 'https://pearl.cdn.cornercard.ch/static/cop-ch/cross/i
 
 export const Homepage = () => {
 
-  const { data: messages, isLoading: isLoadingMessages, error: messageError } = useHttpSimulation(Endpoints_uri.inbox);
-  const { data: cardData, isLoading: isLoadingCardData, error: cardDataError } = useHttpSimulation(Endpoints_uri.cardInfo);
-  const { data: transactions, isLoading: isLoadingTransactions, error: transactionsError } = useHttpSimulation(Endpoints_uri.transactions, 2000);
+  const { data: messages, isLoading: isLoadingMessages, error: messageError } = useHttpSimulation(Endpoints_uri.inbox, 400);
+  const { data: cardData, isLoading: isLoadingCardData, error: cardDataError } = useHttpSimulation(Endpoints_uri.cardInfo, 600);
+  const { data: transactions, isLoading: isLoadingTransactions, error: transactionsError } = useHttpSimulation(Endpoints_uri.transactions, 1200);
 
   const { value: shouldDisplayMessage, setValue: setShouldDisplayMessage } = useLocalStorage(true, 'displayMessage')
 
