@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, Pressable, View } from 'react-native'
 import { HomepageStyle } from './style'
 import useHttpSimulation from '../../hooks/useHttpSimulation'
 import { Endpoints_uri } from '../../costants/Endpoints'
-import { CardBox, CardBoxEmpty } from '../../atoms'
+import { CardBox, CardBoxEmpty, MessageBox } from '../../atoms'
 import { ICardInfo } from '../../interfaces/models/card'
 import { TransactionsList, TransactionsListLoader } from '../../components'
 import { ITransaction } from '../../interfaces/models/transaction'
@@ -12,6 +12,7 @@ import { ITransaction } from '../../interfaces/models/transaction'
 const CARD_ASSET_SAMPLE = 'https://pearl.cdn.cornercard.ch/static/cop-ch/cross/images/cards/big/MASTERCARD_GOLD_CORNER.PNG';
 
 export const Homepage = () => {
+  const [shouldDisplayMessage, setShouldDisplayMessage] = useState<boolean>(true) //set false
 
   const { data: messages, isLoading: isLoadingMessages, error: messageError } = useHttpSimulation(Endpoints_uri.inbox);
   const { data: cardData, isLoading: isLoadingCardData, error: cardDataError } = useHttpSimulation(Endpoints_uri.cardInfo);
@@ -23,6 +24,8 @@ export const Homepage = () => {
 
   return (
     <View style={HomepageStyle.container}>
+        { !isLoadingMessages && shouldDisplayMessage &&  <MessageBox />}
+
         { isLoadingCardData && <CardBoxEmpty uri={CARD_ASSET_SAMPLE} />}
         { !isLoadingCardData && cardData && 
           <CardBox 
@@ -32,9 +35,11 @@ export const Homepage = () => {
             availability={`${(cardData as ICardInfo).availability.amount} ${(cardData as ICardInfo).availability.currency}`}
           />
         }
-        <Pressable onPress={showAllTransactions}>
+
+        <Pressable onPress={showAllTransactions} style={HomepageStyle.primaryBtn}>
           <Text>Show All</Text>
         </Pressable>
+
         { isLoadingTransactions && <TransactionsListLoader />}
         { !isLoadingTransactions && transactions && 
           <TransactionsList 
