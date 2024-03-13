@@ -9,7 +9,7 @@ export const MessageBox = ({ timestamp, title, message, callbackClose }: Message
 
   return (
     <View style={MessageBoxStyle.container}>
-      <Pressable onPress={callbackClose}>
+      <Pressable onPress={callbackClose} testID='messageBox'>
         <View style={MessageBoxStyle.containerClose}>
           <Text style={MessageBoxStyle.close}>X</Text>
         </View>
