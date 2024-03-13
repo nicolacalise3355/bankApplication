@@ -42,6 +42,7 @@ export const Homepage = () => {
     <View style={HomepageStyle.container}>
 
         { !isLoadingMessages && shouldDisplayMessage && messages &&
+          //The duty to sort the messages by time should be a backend thing.
           <MessageBox 
             title={(messages as IInbox[])[0].title} 
             timestamp={(messages as IInbox[])[0].timestamp}
