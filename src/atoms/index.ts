@@ -1,6 +1,4 @@
 export * from "./CardBox"
 export * from "./CardBox/CardBoxEmpty"
 
-export * from "./MessageBox"
-
 export * from "./TransactionBox";

@@ -11,10 +11,13 @@ export interface CardBoxProp {
     digits: string;
 }
 
-export interface TransactionsListProps {
-    transactions: ITransaction[];
-}
-
 export interface TransactionBoxProps{
     transaction: ITransaction;
+}
+
+export interface MessageBoxProps{
+    timestamp: string;
+    title: string;
+    message: string;
+    callbackClose: () => void;
 }
